@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/navigation";
 import { getSiteConfig } from "@/lib/cms";
+import { getCt } from "@/i18n/content-server";
 import { site as brandDefaults } from "@/lib/site";
 
 type BusinessProfileProps = {
@@ -40,10 +41,11 @@ export async function BusinessProfile({
   contactLabel,
 }: BusinessProfileProps) {
   const site = await getSiteConfig();
+  const ct = await getCt();
   const rows = [
     {
       label: legalLabel,
-      value: brandDefaults.legalName,
+      value: ct(brandDefaults.legalName),
       icon: (
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
           <path d="M4.5 17V5.5A1.5 1.5 0 0 1 6 4h8a1.5 1.5 0 0 1 1.5 1.5V17" />
@@ -61,9 +63,9 @@ export async function BusinessProfile({
       ),
       value: (
         <>
-          {site.streetAddress}
+          {ct(site.streetAddress)}
           <br />
-          {site.addressLocality}, {site.addressCountry}
+          {ct(site.addressLocality)}, {ct(site.addressCountry)}
         </>
       ),
     },
@@ -105,7 +107,7 @@ export async function BusinessProfile({
     },
     {
       label: hoursLabel,
-      value: site.hours,
+      value: ct(site.hours),
       icon: (
         <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
           <circle cx="10" cy="10" r="7" />
@@ -132,7 +134,7 @@ export async function BusinessProfile({
       ),
       value: (
         <a href={brandDefaults.parentUrl} target="_blank" rel="noopener noreferrer" className="hover:text-ink">
-          {brandDefaults.parentBrand}
+          {ct(brandDefaults.parentBrand)}
         </a>
       ),
     },
@@ -153,8 +155,8 @@ export async function BusinessProfile({
             </span>
           ) : null}
           <p className="mt-3 type-kicker text-white/55">{title}</p>
-          <h2 className="mt-2 text-xl font-extrabold tracking-tight text-white">{site.name}</h2>
-          <p className="mt-1 text-sm text-white/70">{site.tagline}</p>
+          <h2 className="mt-2 text-xl font-extrabold tracking-tight text-white">{ct(site.name)}</h2>
+          <p className="mt-1 text-sm text-white/70">{ct(site.tagline)}</p>
         </div>
       </div>
       <dl className="divide-y divide-border">

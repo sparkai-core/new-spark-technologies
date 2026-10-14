@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -34,6 +35,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const tp = await getTranslations("Products");
   const td = await getTranslations("Pages.productDetail");
   const p = localizeProduct(product, (k) => tp(k as never));
+  const ct = await getCt();
 
   return (
     <>
@@ -58,7 +60,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <div className="relative aspect-[952/450] overflow-hidden rounded-[var(--radius-lg)] border border-border bg-bg shadow-[var(--shadow-sm)]">
               <Image
                 src={p.image}
-                alt={`${p.name} product screenshot`}
+                alt={ct.fmt("{name} product screenshot", { name: p.name })}
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 100vw, 40vw"

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -19,6 +20,7 @@ export default async function ProductsPage() {
   const t = await getTranslations("Pages.products");
   const tp = await getTranslations("Products");
   const localized = localizeProducts((k) => tp(k as never));
+  const ct = await getCt();
 
   return (
     <>
@@ -52,7 +54,7 @@ export default async function ProductsPage() {
                   <div className="relative aspect-[952/450] border-b border-border bg-surface">
                     <Image
                       src={product.image}
-                      alt={`${product.name} product screenshot`}
+                      alt={ct.fmt("{name} product screenshot", { name: product.name })}
                       fill
                       className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
                       sizes="(max-width: 640px) 100vw, 50vw"

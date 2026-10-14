@@ -8,6 +8,7 @@ import { matchChatTopic, suggestionKeys, topicLinks, type ChatTopic } from "@/li
 import { site as defaultSite } from "@/lib/site";
 import { submitLead } from "@/lib/submit-lead";
 import { Button } from "@/components/ui/Button";
+import { useCt } from "@/components/i18n/ContentI18n";
 
 type Message = {
   from: "you" | "spark";
@@ -25,6 +26,7 @@ export const ChatWidget = ({
   whatsapp = defaultSite.whatsapp,
 }: ChatWidgetProps) => {
   const t = useTranslations("AskSpark");
+  const ct = useCt();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [showLead, setShowLead] = useState(false);
@@ -35,7 +37,7 @@ export const ChatWidget = ({
 
   const buildReply = (topic: ChatTopic): Message => ({
     from: "spark",
-    text: t(`replies.${topic}`, { address }),
+    text: t(`replies.${topic}`, { address: ct(address) }),
     links: topicLinks[topic].map((link) => ({
       href: link.href === defaultSite.whatsapp ? whatsapp : link.href,
       label: t(`links.${link.labelKey}`),

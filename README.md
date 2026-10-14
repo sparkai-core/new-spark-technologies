@@ -18,5 +18,3 @@ npm run dev
 ```
 
 Runs on [http://localhost:3002](http://localhost:3002).
-
-# new-spark-technologies

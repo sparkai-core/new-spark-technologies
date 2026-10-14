@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { OfficeCard } from "@/components/site/OfficeCard";
@@ -620,9 +621,10 @@ export async function OfficeSection() {
 
 export async function HomeFinalCta() {
   const t = await getTranslations("Home");
+  const ct = await getCt();
 
   return (
-    <section className="border-t border-border bg-bg" aria-label="Final call to action">
+    <section className="border-t border-border bg-bg" aria-label={ct("Final call to action")}>
       <div className="mx-auto max-w-6xl px-4 section-y sm:px-5">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="af-section-title text-balance">{t("finalCtaTitle")}</h2>

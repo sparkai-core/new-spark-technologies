@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Button } from "@/components/ui/Button";
 import { IndustriesExplorer } from "@/components/industries/IndustriesExplorer";
 import { OfficeCard } from "@/components/site/OfficeCard";
@@ -16,6 +17,7 @@ export async function generateMetadata() {
 
 export default async function IndustriesPage() {
   const t = await getTranslations("Pages.industries");
+  const ct = await getCt();
 
   return (
     <>
@@ -53,7 +55,7 @@ export default async function IndustriesPage() {
 
       <IndustriesExplorer />
 
-      <Section label="Office" className="border-t border-border bg-surface">
+      <Section label={ct("Office")} className="border-t border-border bg-surface">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <SectionHeading kicker={t("nextKicker")} title={t("nextTitle")} lede={t("nextLede")} />

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Button } from "@/components/ui/Button";
 import { CtaBand, PageHero } from "@/components/site/CtaBand";
 import { OfficeCard } from "@/components/site/OfficeCard";
@@ -20,6 +21,7 @@ export default async function CaseStudiesPage() {
   const tu = await getTranslations("Ui");
   const tc = await getTranslations("CaseStudies");
   const localized = localizeCaseStudies((k) => tc(k as never));
+  const ct = await getCt();
 
   return (
     <>
@@ -51,7 +53,7 @@ export default async function CaseStudiesPage() {
                           <div className="relative min-h-[16rem] overflow-hidden rounded-xl sm:min-h-[20rem] lg:min-h-[24rem]">
                             <Image
                               src={gallery[0].src}
-                              alt={gallery[0].alt}
+                              alt={ct(gallery[0].alt)}
                               fill
                               className="object-cover"
                               sizes="(max-width: 1024px) 100vw, 55vw"
@@ -77,7 +79,7 @@ export default async function CaseStudiesPage() {
                               >
                                 <Image
                                   src={photo.src}
-                                  alt={photo.alt}
+                                  alt={ct(photo.alt)}
                                   fill
                                   className="object-cover transition duration-500 hover:scale-[1.03]"
                                   sizes="(max-width: 1024px) 50vw, 25vw"

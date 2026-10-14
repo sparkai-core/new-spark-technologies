@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { useCt } from "@/components/i18n/ContentI18n";
 import { Button } from "@/components/ui/Button";
 import { SlideControls } from "@/components/ui/SlideControls";
 import { useSlideSwipe } from "@/components/ui/useSlideSwipe";
@@ -92,6 +93,8 @@ const SUITES = [
 
 export function TrustedByBand() {
   const t = useTranslations("Home");
+  const ct = useCt();
+  const trustDomains = ct.deep(TRUST_DOMAINS);
 
   return (
     <section className="border-b border-border bg-bg" aria-label={t("trustedBy")}>
@@ -108,7 +111,7 @@ export function TrustedByBand() {
       </div>
 
       <ul className="mt-10 grid w-full grid-cols-2 divide-x divide-y divide-border border-y border-border sm:grid-cols-3 lg:grid-cols-6 lg:divide-y-0">
-        {TRUST_DOMAINS.map((item) => (
+        {trustDomains.map((item) => (
           <li key={item.id}>
             <Link
               href={`/industries#${item.id}`}
@@ -149,6 +152,8 @@ export function TrustedByBand() {
 
 export function SolutionsModulesSection() {
   const t = useTranslations("Home");
+  const ct = useCt();
+  const moduleItems = ct.deep(modules);
   const rtl = useLocale() === "ar";
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -188,7 +193,7 @@ export function SolutionsModulesSection() {
           role="tablist"
           aria-label={t("solutionsTitle")}
         >
-          {modules.map((item, i) => (
+          {moduleItems.map((item, i) => (
             <button
               key={item.id}
               type="button"
@@ -233,7 +238,7 @@ export function SolutionsModulesSection() {
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{ transform: `translate3d(${rtl ? active * 100 : -active * 100}%, 0, 0)` }}
           >
-            {modules.map((item, i) => (
+            {moduleItems.map((item, i) => (
               <div
                 key={item.id}
                 className="w-full shrink-0 bg-gradient-to-br from-[#e4e8ff] via-[#f3f1fc] to-[#f8eefc] p-6 sm:p-10 lg:p-14"
@@ -464,7 +469,8 @@ export function ClaritySection() {
 
 export function StoriesSection() {
   const t = useTranslations("Home");
-  const stories = caseStudies.slice(0, 3);
+  const ct = useCt();
+  const stories = ct.deep(caseStudies.slice(0, 3));
 
   return (
     <section className="border-b border-border bg-bg" aria-label={t("storiesTitle")}>
@@ -505,7 +511,7 @@ export function StoriesSection() {
                 <dl className="mt-5 grid grid-cols-2 gap-3 border-y border-border py-4">
                   {item.metrics.map((m) => (
                     <div key={m.label}>
-                      <dt className="text-[1.35rem] font-semibold tracking-[-0.03em] text-ink">{m.value}</dt>
+                      <dt className="text-[1.35rem] font-semibold tracking-[-0.03em] text-ink">{ct(m.value)}</dt>
                       <dd className="mt-0.5 text-xs text-muted">{m.label}</dd>
                     </div>
                   ))}

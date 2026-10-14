@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useLocale } from "next-intl";
+import { ctFor } from "@/i18n/content-server";
 
 export type TeamMemberCard = {
   name: string;
@@ -27,13 +29,14 @@ export function TeamRoster({
   members: TeamMemberCard[];
   labels?: RosterLabels;
 }) {
-  const copy = labels ?? {
+  const ct = ctFor(useLocale());
+  const copy = labels ?? ct.deep({
     ourTeam: "Our team",
     featured: "Featured specialists",
     plusOrg: "Plus 45+ employees across the organisation",
     plusOrgText: "Business development, developers, ML engineers, and managers supporting every engagement.",
     roles: ["Business Development", "Developers", "ML Engineers", "Managers"],
-  };
+  });
 
   return (
     <section className="border-b border-border" aria-label={copy.ourTeam}>
@@ -97,10 +100,10 @@ export function TeamRoster({
           >
             <div className="px-6 text-center">
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted">
-                Team photo
+                {ct("Team photo")}
               </p>
               <p className="mt-2 text-sm text-ink-2">
-                Placeholder — add organisation team picture here later
+                {ct("Placeholder — add organisation team picture here later")}
               </p>
             </div>
           </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { modules } from "@/lib/modules";
+import { useCt } from "@/components/i18n/ContentI18n";
 
 /** x/y land on the equipment. dx/dy place the chip so the leader stays visible. */
 type Pin = {
@@ -87,8 +88,9 @@ export function ModuleOpsVisual({
   id: string;
   active?: boolean;
 }) {
+  const ct = useCt();
   const mod = modules.find((m) => m.id === id);
-  const steps = mod?.flow ?? [];
+  const steps = ct.deep(mod?.flow ?? []);
   const pins = PINS[id] ?? FALLBACK;
   const [step, setStep] = useState(0);
 

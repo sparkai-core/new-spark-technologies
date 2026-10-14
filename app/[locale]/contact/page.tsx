@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Button } from "@/components/ui/Button";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { PageHero } from "@/components/site/CtaBand";
@@ -24,6 +25,7 @@ export default async function ContactPage() {
   const tp = await getTranslations("Products");
   const tu = await getTranslations("Ui");
   const site = await getSiteConfig();
+  const ct = await getCt();
 
   return (
     <>
@@ -92,7 +94,7 @@ export default async function ContactPage() {
               notSureLabel={tu("notSureYet")}
             />
             <p className="px-1 text-xs text-muted">
-              {t("directNote", { email: site.email, address: site.address })}
+              {t("directNote", { email: site.email, address: ct(site.address) })}
             </p>
           </div>
         </div>

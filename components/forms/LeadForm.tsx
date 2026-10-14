@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useId, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/submit-lead";
+import { useCt } from "@/components/i18n/ContentI18n";
 
 type LeadFormProps = {
   moduleOptions: { id: string; label: string }[];
@@ -21,6 +22,7 @@ export function LeadForm({
   notSureLabel,
 }: LeadFormProps) {
   const t = useTranslations("Contact");
+  const ct = useCt();
   const id = useId();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
@@ -144,7 +146,7 @@ export function LeadForm({
       </label>
 
       {status === "error" ? (
-        <p className="text-sm text-red-600">Could not reach the inbox. Please try again or email us.</p>
+        <p className="text-sm text-red-600">{ct("Could not reach the inbox. Please try again or email us.")}</p>
       ) : null}
 
       <button
@@ -152,7 +154,7 @@ export function LeadForm({
         disabled={status === "sending"}
         className="inline-flex h-11 items-center justify-center rounded-md bg-gradient-to-r from-brand to-brand-2 px-5 text-sm font-semibold text-white disabled:opacity-60"
       >
-        {status === "sending" ? "Sending…" : t("sendBriefing")}
+        {status === "sending" ? ct("Sending…") : t("sendBriefing")}
       </button>
     </form>
   );

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { SocialIcon, type SocialName } from "@/components/ui/SocialIcon";
+import { useCt } from "@/components/i18n/ContentI18n";
 
 export type SocialLink = {
   name: SocialName;
@@ -18,6 +19,14 @@ type SocialLinksProps = {
 
 export const SocialLinks = ({ links, tone = "light", className = "" }: SocialLinksProps) => {
   const t = useTranslations("HomeContent");
+  const ct = useCt();
+  /** "Spark Technologies on LinkedIn" → translated "{brand} on {network}" pattern; other labels as-is. */
+  const labelFor = (label: string) => {
+    const direct = ct(label);
+    if (direct !== label) return direct;
+    const m = /^(.*\S) on (\S.*)$/.exec(label);
+    return m ? ct.fmt("{brand} on {network}", { brand: m[1], network: m[2] }) : label;
+  };
 
   if (!links.length) return null;
 
@@ -35,8 +44,8 @@ export const SocialLinks = ({ links, tone = "light", className = "" }: SocialLin
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={link.label}
-              title={link.label}
+              aria-label={labelFor(link.label)}
+              title={labelFor(link.label)}
               className={itemClass}
             >
               <SocialIcon name={link.name} className="h-[15px] w-[15px]" />

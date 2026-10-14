@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Button } from "@/components/ui/Button";
 import { BusinessProfile } from "@/components/site/BusinessProfile";
 import { CtaBand, PageHero } from "@/components/site/CtaBand";
@@ -23,6 +24,7 @@ export default async function CompanyPage() {
   const tu = await getTranslations("Ui");
   const to = await getTranslations("Pages.office");
   const site = await getSiteConfig();
+  const ct = await getCt();
 
   const focusCards = [
     {
@@ -144,14 +146,14 @@ export default async function CompanyPage() {
         <SectionHeading kicker={t("ecosystemKicker")} title={t("ecosystemTitle")} />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <article className="panel p-6">
-            <h3 className="type-h3">Spark AI</h3>
+            <h3 className="type-h3">{ct("Spark AI")}</h3>
             <p className="mt-2 text-sm leading-6 text-ink-2">{t("ecosystemSparkAi")}</p>
             <a href={site.sparkAiUrl} className="mt-4 inline-flex text-sm font-semibold text-brand hover:text-brand-hover" rel="noreferrer">
               {t("visitSparkAi")} →
             </a>
           </article>
           <article className="panel p-6">
-            <h3 className="type-h3">{site.parentBrand}</h3>
+            <h3 className="type-h3">{ct(site.parentBrand)}</h3>
             <p className="mt-2 text-sm leading-6 text-ink-2">{t("ecosystemParent")}</p>
             <a href={site.parentUrl} className="mt-4 inline-flex text-sm font-semibold text-brand hover:text-brand-hover" rel="noreferrer">
               {t("visitParent")} →

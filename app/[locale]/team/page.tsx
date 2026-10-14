@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import Image from "next/image";
 import { TeamRoster } from "@/components/site/TeamRoster";
 import { Link } from "@/i18n/navigation";
@@ -101,6 +102,7 @@ export default async function TeamPage() {
   const t = await getTranslations("Team");
   const tc = await getTranslations("TeamContent");
   const team = await getTeamConfig();
+  const ct = await getCt();
 
   type Person = {
     name: string;
@@ -144,7 +146,7 @@ export default async function TeamPage() {
     : team.locations.active.map((_, i) => tc(`locActive${i}` as "locActive0"));
 
   const stats = team.stats.length
-    ? team.stats
+    ? team.stats.map((stat) => ({ ...stat, label: ct(stat.label) }))
     : [
         { value: "45+", label: t("stats.members") },
         { value: "6", label: t("stats.countries") },

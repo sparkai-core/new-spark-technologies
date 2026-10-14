@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { getCt } from "@/i18n/content-server";
 import { Logo } from "@/components/site/Logo";
 import { SocialLinks } from "@/components/site/SocialLinks";
 import { Link } from "@/i18n/navigation";
@@ -13,6 +14,7 @@ export async function Footer() {
   const tm = await getTranslations("Modules");
   const tc = await getTranslations("HomeContent");
   const site = await getSiteConfig();
+  const ct = await getCt();
 
   const navLabel = (href: string) => {
     const map: Record<
@@ -33,14 +35,15 @@ export async function Footer() {
 
   return (
     <footer className="dark-panel mt-4 rounded-none border-x-0 border-b-0">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
-        <div>
+      {/* Phones: brand row, then Explore + Solutions side by side, then contact links full width */}
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-14 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="col-span-2 md:col-span-1">
           <Logo tone="light" />
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/70">{t("blurb")}</p>
           <SocialLinks links={site.socials} tone="dark" className="mt-5" />
-          <p className="mt-5 text-sm text-white/70">{site.streetAddress}</p>
+          <p className="mt-5 text-sm text-white/70">{ct(site.streetAddress)}</p>
           <p className="text-sm text-white/55">
-            {site.addressLocality}, {site.addressCountry}
+            {ct(site.addressLocality)}, {ct(site.addressCountry)}
           </p>
           <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-white/45">{t("markets")}</p>
           <p className="mt-3 text-sm text-white/55">{tc("hours")}</p>
@@ -89,7 +92,7 @@ export async function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="col-span-2 md:col-span-1">
           <p className="type-kicker">{t("ecosystem")}</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             <li>

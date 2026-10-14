@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useCt } from "@/components/i18n/ContentI18n";
 
 type Step = { label: string; caption: string };
 type Pin = { x: number; y: number; dx: number; dy: number };
@@ -136,7 +137,8 @@ const SCENES: Record<string, Scene> = {
 };
 
 export function SuiteOpsVisual({ id, active = true }: { id: string; active?: boolean }) {
-  const scene = SCENES[id];
+  const ct = useCt();
+  const scene = ct.deep(SCENES[id]);
   const steps = scene?.steps ?? [];
   const pins = scene?.pins ?? [];
   const [step, setStep] = useState(0);

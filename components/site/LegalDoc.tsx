@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { ctFor } from "@/i18n/content-server";
 
 type TocItem = { id: string; label: string };
 type RelatedItem = { href: string; label: string; hint?: string };
@@ -31,6 +33,7 @@ export function LegalShell({
   docNav,
   children,
 }: LegalShellProps) {
+  const ct = ctFor(useLocale());
   return (
     <>
       <header className="relative overflow-hidden border-b border-border bg-bg">
@@ -57,7 +60,7 @@ export function LegalShell({
 
           {docNav && docNav.length > 0 ? (
             <nav
-              aria-label="Legal pages"
+              aria-label={ct("Legal pages")}
               className="mt-8 inline-flex flex-wrap gap-1 rounded-lg border border-border bg-surface/80 p-1 rise rise-delay-3"
             >
               {docNav.map((item) => (

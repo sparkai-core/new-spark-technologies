@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { LocaleSwitcher } from "@/components/site/LocaleSwitcher";
 import { Logo } from "@/components/site/Logo";
+import { useCt } from "@/components/i18n/ContentI18n";
 import { Button } from "@/components/ui/Button";
 import { Link, usePathname } from "@/i18n/navigation";
 import { products } from "@/lib/products";
@@ -208,6 +209,11 @@ export const Header = () => {
   const t = useTranslations("Nav");
   const tm = useTranslations("Modules");
   const tp = useTranslations("Products");
+  const ct = useCt();
+  const solutionSuiteItems = ct.deep(solutionSuites);
+  const productSuiteItems = ct.deep(productSuites);
+  const industryLinkItems = ct.deep(industryLinks);
+  const caseStudyLinkItems = ct.deep(caseStudyLinks);
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
@@ -302,7 +308,7 @@ export const Header = () => {
     if (mega === "solutions") {
       return (
         <SuiteMega
-          suites={solutionSuites}
+          suites={solutionSuiteItems}
           suiteTitle={suiteTitle}
           featuredLabel={t("featured")}
           featuredItems={featuredItems}
@@ -312,7 +318,7 @@ export const Header = () => {
     if (mega === "products") {
       return (
         <SuiteMega
-          suites={productSuites}
+          suites={productSuiteItems}
           suiteTitle={suiteTitle}
           featuredLabel={t("featured")}
           featuredItems={featuredItems}
@@ -324,7 +330,7 @@ export const Header = () => {
         <ListMega
           title={t("industries")}
           href="/industries"
-          items={industryLinks}
+          items={industryLinkItems}
           columns={2}
           viewAll={t("viewAll")}
           featuredLabel={t("featured")}
@@ -337,7 +343,7 @@ export const Header = () => {
         <ListMega
           title={t("caseStudies")}
           href="/case-studies"
-          items={caseStudyLinks}
+          items={caseStudyLinkItems}
           columns={1}
           viewAll={t("viewAll")}
           featuredLabel={t("featured")}
@@ -505,9 +511,9 @@ export const Header = () => {
                       : item.href === "/products"
                         ? products.map((p) => ({ href: p.href, label: productName(p.slug) }))
                         : item.href === "/industries"
-                          ? industryLinks.map((link) => ({ href: link.href, label: link.title }))
+                          ? industryLinkItems.map((link) => ({ href: link.href, label: link.title }))
                           : item.href === "/case-studies"
-                            ? caseStudyLinks.map((link) => ({ href: link.href, label: link.title }))
+                            ? caseStudyLinkItems.map((link) => ({ href: link.href, label: link.title }))
                             : [];
                   const expanded = mobileSection === item.href;
                   const active = isActive(item.href);

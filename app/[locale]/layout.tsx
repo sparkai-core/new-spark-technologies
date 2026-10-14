@@ -7,6 +7,8 @@ import { BackToTop } from "@/components/site/BackToTop";
 import { ChatWidget } from "@/components/site/ChatWidget";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { ContentDictProvider } from "@/components/i18n/ContentI18n";
+import { contentDictFor, getCt } from "@/i18n/content-server";
 import { isRtl, routing } from "@/i18n/routing";
 import { getSiteConfig } from "@/lib/cms";
 import { site } from "@/lib/site";
@@ -47,13 +49,15 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const ct = await getCt();
+  return {
   metadataBase: new URL(site.url),
   title: {
-    default: "Spark Technologies — Enterprise AI for Real-World Operations",
+    default: ct("Spark Technologies — Enterprise AI for Real-World Operations"),
     template: "%s · Spark Technologies",
   },
-  description: site.description,
+  description: ct(site.description),
   applicationName: site.name,
   icons: {
     icon: "/assets/brand/spark-mark.png",
@@ -61,14 +65,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Spark Technologies",
-    description: site.description,
+    description: ct(site.description),
     url: site.url,
     siteName: site.name,
     locale: "en_AE",
     type: "website",
   },
   robots: { index: true, follow: true },
-};
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -103,6 +108,7 @@ export default async function LocaleLayout({
         }`}
       >
         <NextIntlClientProvider messages={messages}>
+          <ContentDictProvider dict={contentDictFor(locale)}>
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-on-brand"
@@ -116,6 +122,7 @@ export default async function LocaleLayout({
           <Footer />
           <ChatWidget address={liveSite.address} whatsapp={liveSite.whatsapp} />
           <BackToTop />
+          </ContentDictProvider>
         </NextIntlClientProvider>
       </body>
     </html>

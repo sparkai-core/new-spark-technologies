@@ -1,11 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { getSiteConfig } from "@/lib/cms";
+import { getCt } from "@/i18n/content-server";
 
 export async function OfficeCard({ tone = "light" }: { tone?: "light" | "dark" }) {
   const t = await getTranslations("Pages.office");
   const tc = await getTranslations("HomeContent");
   const site = await getSiteConfig();
+  const ct = await getCt();
   const dark = tone === "dark";
 
   return (
@@ -17,9 +19,9 @@ export async function OfficeCard({ tone = "light" }: { tone?: "light" | "dark" }
       <p className={`type-kicker ${dark ? "text-white/55" : ""}`}>{t("kicker")}</p>
       <h3 className={`type-h3 mt-3 ${dark ? "text-white" : ""}`}>{t("title")}</h3>
       <p className={`mt-3 text-sm leading-6 ${dark ? "text-white/70" : "text-ink-2"}`}>
-        {site.streetAddress}
+        {ct(site.streetAddress)}
         <br />
-        {site.addressLocality}, {site.addressCountry}
+        {ct(site.addressLocality)}, {ct(site.addressCountry)}
       </p>
       <dl className={`mt-5 space-y-3 text-sm ${dark ? "text-white/70" : "text-ink-2"}`}>
         <div>
