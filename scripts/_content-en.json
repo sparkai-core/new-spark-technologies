@@ -428,17 +428,6 @@
       "out0": "Unified ops dashboards",
       "out1": "Reliability trends",
       "out2": "Leadership-ready reporting"
-    },
-    "adicc": {
-      "sector": "Construction",
-      "client": "ADICC",
-      "title": "Unified AI construction platform (POC pilot)",
-      "problem": "Projects, vendors, and site signals lived in disconnected tools.",
-      "approach": "Unified AI construction platform for planning, monitoring, and delivery workflows.",
-      "result": "Clearer project visibility with AI-assisted coordination.",
-      "out0": "Project visibility",
-      "out1": "Vendor and site signal fusion",
-      "out2": "Delivery workflow support"
     }
   },
   "HomeContent": {

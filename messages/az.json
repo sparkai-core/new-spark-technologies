@@ -460,9 +460,9 @@
       "lede": "Hər modulun problemlərini, Spark-ın necə həll etdiyini və siqnaldan fəaliyyətə əməliyyat axınını araşdırın.",
       "ctaPrimary": "Korporativ Demo Planlaşdırın",
       "ctaSecondary": "Keyslərə Baxın",
-      "modulesKicker": "Müəssisələr üçün AI Modulları",
-      "modulesTitle": "Dərinləşmək üçün modul seçin",
-      "modulesLede": "Hər səhifədə ağrı nöqtələri, həllər, nəticələr, şəkillər və animasiyalı proses axını var.",
+      "modulesKicker": "Müəssisələr üçün AI həlləri",
+      "modulesTitle": "Əməliyyatlarınızı AI ilə transformasiya edin",
+      "modulesLede": "Etibarlılığı artıran, iş axınlarını sadələşdirən və əməliyyat məlumatlarını ölçülə bilən nəticələrə çevirən həlləri kəşf edin.",
       "painPoints": "Ağrı nöqtələri",
       "weDeliver": "Təqdim edirik",
       "fullBrief": "Tam brifinq →",
@@ -1204,17 +1204,6 @@
       "out0": "Vahid əməliyyat panelləri",
       "out1": "Etibarlılıq tendensiyaları",
       "out2": "Rəhbərliyə hazır hesabatlıq"
-    },
-    "adicc": {
-      "sector": "Tikinti",
-      "client": "ADICC",
-      "title": "Vahid AI tikinti platforması (POC pilot)",
-      "problem": "Layihələr, podratçılar və sahə siqnalları əlaqəsiz alətlərdə yaşayırdı.",
-      "approach": "Planlaşdırma, monitorinq və çatdırılma iş axınları üçün vahid AI tikinti platforması.",
-      "result": "AI dəstəkli əlaqələndirmə ilə daha aydın layihə görünürlüyü.",
-      "out0": "Layihə görünürlüyü",
-      "out1": "Podratçı və sahə siqnal birləşməsi",
-      "out2": "Çatdırılma iş axını dəstəyi"
     }
   },
   "HomeContent": {

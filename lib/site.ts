@@ -166,7 +166,6 @@ export const caseStudyLinks = [
   { href: "/case-studies#condor-energies", title: "Condor Energies — warehouse & fuel loading" },
   { href: "/case-studies#ady-railways", title: "ADY Railways — corridor monitoring" },
   { href: "/case-studies#metro-baku", title: "Metro Baku — executive analytics" },
-  { href: "/case-studies#adicc", title: "ADICC — construction platform" },
 ] as const;
 
 export const megaFeatured = [
@@ -559,21 +558,6 @@ export const caseStudies = [
       { value: "POC", label: "to leadership" },
     ],
     image: "/assets/case-studies/metro-baku-analytics.jpg",
-  },
-  {
-    id: "adicc",
-    sector: "Construction",
-    client: "ADICC",
-    title: "Unified AI construction platform (POC pilot)",
-    problem: "Projects, vendors, and site signals lived in disconnected tools.",
-    approach: "Unified AI construction platform for planning, monitoring, and delivery workflows.",
-    result: "Clearer project visibility with AI-assisted coordination.",
-    outcomes: ["Project visibility", "Vendor and site signal fusion", "Delivery workflow support"],
-    metrics: [
-      { value: "Unified", label: "project view" },
-      { value: "POC", label: "delivery path" },
-    ],
-    image: "/assets/case-studies/adicc-construction.jpg",
   },
 ] as const;
 

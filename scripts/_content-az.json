@@ -428,17 +428,6 @@
       "out0": "Vahid əməliyyat panelləri",
       "out1": "Etibarlılıq tendensiyaları",
       "out2": "Rəhbərliyə hazır hesabatlıq"
-    },
-    "adicc": {
-      "sector": "Tikinti",
-      "client": "ADICC",
-      "title": "Vahid AI tikinti platforması (POC pilot)",
-      "problem": "Layihələr, podratçılar və sahə siqnalları əlaqəsiz alətlərdə yaşayırdı.",
-      "approach": "Planlaşdırma, monitorinq və çatdırılma iş axınları üçün vahid AI tikinti platforması.",
-      "result": "AI dəstəkli əlaqələndirmə ilə daha aydın layihə görünürlüyü.",
-      "out0": "Layihə görünürlüyü",
-      "out1": "Podratçı və sahə siqnal birləşməsi",
-      "out2": "Çatdırılma iş axını dəstəyi"
     }
   },
   "HomeContent": {
