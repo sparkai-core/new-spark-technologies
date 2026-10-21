@@ -23,7 +23,6 @@ export default async function ContactPage() {
   const t = await getTranslations("Contact");
   const tm = await getTranslations("Modules");
   const tp = await getTranslations("Products");
-  const tu = await getTranslations("Ui");
   const site = await getSiteConfig();
   const ct = await getCt();
 
@@ -80,19 +79,8 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <LeadForm
-              moduleOptions={solutions.map((s) => ({
-                id: s.id,
-                label: tm(`${s.id}.short` as never),
-              }))}
-              productOptions={products.map((p) => ({
-                id: p.slug,
-                label: tp(`${p.slug}.name` as never),
-              }))}
-              industryBriefingLabel={tu("industryBriefing")}
-              notSureLabel={tu("notSureYet")}
-            />
+          <div className="min-w-0 space-y-3">
+            <LeadForm />
             <p className="px-1 text-xs text-muted">
               {t("directNote", { email: site.email, address: ct(site.address) })}
             </p>
