@@ -59,6 +59,9 @@ export async function generateMetadata(): Promise<Metadata> {
   },
   description: ct(site.description),
   applicationName: site.name,
+  verification: {
+    google: "E_FVcy1Grefuzq-bQaV7NrAAy6lI8GUKP6bXdPJOD7I",
+  },
   icons: {
     icon: "/assets/brand/spark-mark.png",
     apple: "/assets/brand/spark-mark.png",
