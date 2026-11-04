@@ -3,14 +3,13 @@ import { IBM_Plex_Mono, Instrument_Serif, Manrope, Noto_Sans_Arabic } from "next
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { BackToTop } from "@/components/site/BackToTop";
-import { ChatWidget } from "@/components/site/ChatWidget";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { ContentDictProvider } from "@/components/i18n/ContentI18n";
 import { contentDictFor, getCt } from "@/i18n/content-server";
 import { isRtl, routing } from "@/i18n/routing";
-import { getSiteConfig } from "@/lib/cms";
 import { site } from "@/lib/site";
 import "../globals.css";
 
@@ -97,8 +96,6 @@ export default async function LocaleLayout({
   const tc = await getTranslations("HomeContent");
   const rtl = isRtl(locale);
   const lang = locale === "en" ? "en-AE" : locale === "ar" ? "ar" : "az";
-  const liveSite = await getSiteConfig();
-
   return (
     <html
       lang={lang}
@@ -123,10 +120,15 @@ export default async function LocaleLayout({
             {children}
           </main>
           <Footer />
-          <ChatWidget address={liveSite.address} whatsapp={liveSite.whatsapp} />
           <BackToTop />
           </ContentDictProvider>
         </NextIntlClientProvider>
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6aeb16f2ce7c96a75aed4d1a"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
