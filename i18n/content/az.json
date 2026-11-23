@@ -1,5 +1,6 @@
 {
  "Dubai": "Dubay",
+ "All countries": "Bütün ölkələr",
  "Sunday – Thursday, 9:00 – 18:00 GST": "Bazar – Cümə axşamı, 9:00 – 18:00 GST",
  "Solutions": "Həllər",
  "Products": "Məhsullar",
@@ -804,6 +805,9 @@
  "Spark Technologies builds enterprise AI systems for industrial and operational environments — from data to decisions at scale.": "Spark Technologies sənaye və əməliyyat mühitləri üçün korporativ AI sistemləri qurur — məlumatdan qərarlara, geniş miqyasda.",
  "Office 705, New Century City Tower, Port Saeed, Dubai, UAE": "Ofis 705, New Century City Tower, Port Saeed, Dubay, BƏƏ",
  "Office 705, New Century City Tower, Port Saeed": "Ofis 705, New Century City Tower, Port Saeed",
+ "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor, Baku, Azerbaijan": "Cəlil Məmmədquluzadə küç. 102A, City Point Biznes Mərkəzi, 2-ci mərtəbə, Bakı, Azərbaycan",
+ "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor": "Cəlil Məmmədquluzadə küç. 102A, City Point Biznes Mərkəzi, 2-ci mərtəbə",
+ "Baku": "Bakı",
  "Spark Technologies on LinkedIn": "LinkedIn-də Spark Technologies",
  "Spark Technologies on Instagram": "Instagram-da Spark Technologies",
  "Spark Technologies on X": "X-də Spark Technologies",
@@ -917,5 +921,12 @@
  "Using AI to solve real business problems": "Real biznes problemlərini AI ilə həll edirik",
  "{name} product screenshot": "{name} məhsulunun ekran görüntüsü",
  "{brand} on {network}": "{brand} — {network}",
- "UAE": "BƏƏ"
+ "UAE": "BƏƏ",
+ "AI Strategy Head": "AI Strategiya Rəhbəri",
+ "AI / ML Engineer": "AI / ML mühəndisi",
+ "AI Automation Engineer": "AI avtomatlaşdırma mühəndisi",
+ "AI Agentic Engineer": "AI agent mühəndisi",
+ "Full Stack Developer Lead": "Full Stack developer rəhbəri",
+ "Full Stack Developer": "Full Stack developer",
+ "Data Annotator": "Məlumat annotatoru"
 }
