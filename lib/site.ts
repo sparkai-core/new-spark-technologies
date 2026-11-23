@@ -1,3 +1,44 @@
+export type OfficeId = "dubai" | "baku";
+
+export type Office = {
+  id: OfficeId;
+  city: string;
+  label: string;
+  /** Legal entity operating this office. */
+  legalName: string;
+  address: string;
+  streetAddress: string;
+  locality: string;
+  country: string;
+  maps: string;
+};
+
+/** Both offices, in display order (Dubai first on this site). The single-address fields below stay the primary/HQ. */
+const offices: readonly Office[] = [
+  {
+    id: "dubai",
+    city: "Dubai",
+    label: "Dubai office",
+    legalName: "Brand Spark Digital Media LLC",
+    address: "Office 705, New Century City Tower, Port Saeed, Dubai, UAE",
+    streetAddress: "Office 705, New Century City Tower, Port Saeed",
+    locality: "Dubai",
+    country: "AE",
+    maps: "https://maps.google.com/?q=New+Century+City+Tower+Port+Saeed+Dubai",
+  },
+  {
+    id: "baku",
+    city: "Baku",
+    label: "Baku office",
+    legalName: "Spark AI Solutions",
+    address: "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor, Baku, Azerbaijan",
+    streetAddress: "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor",
+    locality: "Baku",
+    country: "AZ",
+    maps: "https://maps.google.com/?q=City+Point+Business+Center,+102A+Jalil+Mammadguluzadeh+St,+Baku",
+  },
+];
+
 export const site = {
   name: "Spark Technologies",
   legalName: "Brand Spark Digital Media LLC",
@@ -16,36 +57,42 @@ export const site = {
   addressCountry: "UAE",
   hours: "Sunday – Thursday, 9:00 – 18:00 GST",
   maps: "https://maps.google.com/?q=New+Century+City+Tower+Port+Saeed+Dubai",
+  offices,
   sparkAiUrl: "https://www.sparkai.ae",
   parentBrand: "Brand Spark Digital Media",
   parentUrl: "https://brandspark.ae",
-  linkedin: "https://www.linkedin.com/company/spark-technologies",
+  linkedin: "https://www.linkedin.com/company/sparktechnologiesai",
   whatsapp: "https://wa.me/971569567693",
   socials: [
     {
       name: "linkedin" as const,
       label: "Spark Technologies on LinkedIn",
-      href: "https://www.linkedin.com/company/spark-technologies",
+      href: "https://www.linkedin.com/company/sparktechnologiesai",
     },
     {
       name: "instagram" as const,
       label: "Spark Technologies on Instagram",
-      href: "https://www.instagram.com/sparkai.ae",
+      href: "https://www.instagram.com/sparktechnologiesai",
     },
     {
       name: "x" as const,
       label: "Spark Technologies on X",
-      href: "https://x.com/sparkai_ae",
+      href: "https://x.com/sparktechnoai",
+    },
+    {
+      name: "tiktok" as const,
+      label: "Spark Technologies on TikTok",
+      href: "https://www.tiktok.com/@sparktechnologiesai",
     },
     {
       name: "youtube" as const,
       label: "Spark Technologies on YouTube",
-      href: "https://www.youtube.com/@sparkai_ae",
+      href: "https://www.youtube.com/@Sparktechnologiesai",
     },
     {
       name: "facebook" as const,
       label: "Spark Technologies on Facebook",
-      href: "https://www.facebook.com/sparkai.ae",
+      href: "https://www.facebook.com/sparktechnologiesai/",
     },
     {
       name: "whatsapp" as const,
@@ -586,6 +633,17 @@ export const team = {
       quote: "Transformation sticks when strategy, delivery, and client success move as one.",
       focus: ["Client Outcomes", "Enterprise Delivery", "Strategic Programmes", "Partnerships", "Pilot to Production"],
     },
+    {
+      name: "Anar Aliyev",
+      role: "CEO, Spark AI Azerbaijan",
+      bio: "Leads Spark in Azerbaijan — building client relationships, partnerships and delivery for enterprises and industrial operators across the country.",
+      photo: "/assets/team/anar-aliyev.png",
+      position: "center 20%",
+      location: "Baku",
+      group: "Leadership" as const,
+      tags: ["Azerbaijan", "Leadership", "Partnerships"],
+      focus: ["Azerbaijan Market", "Client Partnerships", "Enterprise Programmes", "Local Delivery"],
+    },
   ],
   delivery: [
     {
@@ -600,23 +658,43 @@ export const team = {
     },
     {
       name: "Sagar Ragathi",
-      role: "AI Strategy Lead",
+      role: "AI Strategy Head",
       bio: "Maps which module and deployment path actually pays back for the plant, grid, or corridor.",
       photo: "/assets/team/sagar-ragathi.png",
       position: "45% 12%",
-      location: "Dubai",
+      location: "All countries",
       group: "AI & Engineering" as const,
       tags: ["AI Strategy", "Systems"],
     },
     {
-      name: "Tooba",
+      name: "Tooba Bibi",
       role: "Head of AI",
       bio: "Builds and tunes the models and agents that sit inside Spark Technologies solutions.",
       photo: "/assets/team/tooba.png",
       position: "48% 6%",
-      location: "Dubai",
+      location: "All countries",
       group: "AI & Engineering" as const,
       tags: ["ML", "Automation"],
+    },
+    {
+      name: "Haris Javed",
+      role: "General Manager",
+      bio: "Runs day-to-day operations from Lahore — keeping teams, delivery and client commitments on track across every engagement.",
+      photo: "/assets/team/haris-javed.jpg",
+      position: "center 20%",
+      location: "Lahore",
+      group: "Operations" as const,
+      tags: ["Operations", "Management"],
+    },
+    {
+      name: "Pardeep Manwani",
+      role: "Accounts & Finance Manager",
+      bio: "Manages accounts and finance — budgeting, billing and reporting that keep the business running smoothly.",
+      photo: "/assets/team/pardeep-manwani.jpg",
+      position: "center 20%",
+      location: "",
+      group: "Finance" as const,
+      tags: ["Finance", "Accounts"],
     },
     {
       name: "Abhinandan",
@@ -639,6 +717,26 @@ export const team = {
       group: "Design & Marketing" as const,
       tags: ["Creative", "Content"],
     },
+    {
+      name: "Subhan Aslam",
+      role: "Business Development",
+      bio: "Opens conversations with new clients and qualifies opportunities so every engagement starts with clear goals.",
+      photo: "/assets/team/subhan-aslam.jpg",
+      position: "center 20%",
+      location: "",
+      group: "Sales & Growth" as const,
+      tags: ["Sales", "Business Development"],
+    },
+    {
+      name: "Abdul Rahman",
+      role: "Business Development",
+      bio: "Opens conversations with new clients and qualifies opportunities so every engagement starts with clear goals.",
+      photo: "/assets/team/abdul-rahman.jpg",
+      position: "center 20%",
+      location: "",
+      group: "Sales & Growth" as const,
+      tags: ["Sales", "Business Development"],
+    },
   ],
   locations: {
     active: ["UAE", "Saudi Arabia", "Azerbaijan", "Uzbekistan", "United Kingdom", "Pakistan"],
@@ -658,4 +756,68 @@ export const team = {
     { value: "1", label: "Mission" },
   ],
 } as const;
+
+/** Wider team shown as a sliding photo rail on the team page; role is optional until it's known. */
+export const widerTeam: readonly { name: string; photo: string; role?: string }[] = [
+  { name: "Gagan Deep", role: "Business Development", photo: "/assets/team/wider/gagan-deep.jpg" },
+  { name: "Mustafa Subhani", role: "AI / ML Engineer", photo: "/assets/team/wider/mustafa-subhani.jpg" },
+  { name: "Abdul Rehman", role: "AI / ML Engineer", photo: "/assets/team/wider/abdul-rehman.jpg" },
+  { name: "Taimoor Amir", role: "AI / ML Engineer", photo: "/assets/team/wider/taimoor-amir.jpg" },
+  { name: "Syed Muhammad Fasih", role: "AI / ML Engineer", photo: "/assets/team/wider/fasih.jpg" },
+  { name: "Abdullah", role: "AI / ML Engineer", photo: "/assets/team/wider/abdullah.jpg" },
+  { name: "Mateen", role: "AI / ML Engineer", photo: "/assets/team/wider/mateen.jpg" },
+  { name: "Arbab Kareem", role: "AI Automation Engineer", photo: "/assets/team/wider/arbab-kareem.jpg" },
+  { name: "Umair Inayat", role: "AI Agentic Engineer", photo: "/assets/team/wider/umair-inayat.jpg" },
+  { name: "Asad Shah", role: "Full Stack Developer Lead", photo: "/assets/team/wider/asad-shah.jpg" },
+  { name: "Zunaira Iqbal", role: "Full Stack Developer", photo: "/assets/team/wider/zunaira-iqbal.jpg" },
+  { name: "Adil", role: "Full Stack Developer", photo: "/assets/team/wider/adil.jpg" },
+  { name: "Ahmad Nadeem", role: "Data Annotator", photo: "/assets/team/wider/ahmad-nadeem.jpg" },
+  { name: "Mueed Anjum", role: "Data Annotator", photo: "/assets/team/wider/mueed-anjum.jpg" },
+];
+
+/** Spark AI Azerbaijan — Baku team with direct contacts (team page). Roles are labelled from Team.bakuRoles. */
+type BakuMember = {
+  name: string;
+  roleKey: "ceo" | "ceoAssistant" | "headBd" | "bd";
+  phone: string;
+  email: string;
+  /** Empty string shows initials until a portrait is added. */
+  photo: string;
+  position: string;
+};
+
+export const bakuTeam: readonly BakuMember[] = [
+  {
+    name: "Anar Aliyev",
+    roleKey: "ceo",
+    phone: "+994 10 216 20 26",
+    email: "anar@sparkai.ae",
+    photo: "/assets/team/anar-aliyev-avatar.jpg",
+    position: "center 20%",
+  },
+  {
+    name: "Sara Badirkhanova",
+    roleKey: "ceoAssistant",
+    phone: "+994 10 239 19 31",
+    email: "sara.badirkhanova@sparkai.az",
+    photo: "/assets/team/sara-badirkhanova.jpg",
+    position: "center center",
+  },
+  {
+    name: "Imran Shikhlinskiy",
+    roleKey: "headBd",
+    phone: "+994 10 239 19 33",
+    email: "imran.shihlinskiy@sparkai.az",
+    photo: "/assets/team/imran-shikhlinskiy.jpg",
+    position: "center center",
+  },
+  {
+    name: "Nigar Abdullayeva",
+    roleKey: "bd",
+    phone: "+994 10 239 19 32",
+    email: "nigar.abdullayeva@sparkai.az",
+    photo: "/assets/team/nigar-abdullayeva.jpg",
+    position: "center center",
+  },
+];
 

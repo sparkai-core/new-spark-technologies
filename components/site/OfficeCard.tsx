@@ -6,6 +6,7 @@ import { getCt } from "@/i18n/content-server";
 export async function OfficeCard({ tone = "light" }: { tone?: "light" | "dark" }) {
   const t = await getTranslations("Pages.office");
   const tc = await getTranslations("HomeContent");
+  const to = await getTranslations("Offices");
   const site = await getSiteConfig();
   const ct = await getCt();
   const dark = tone === "dark";
@@ -18,11 +19,30 @@ export async function OfficeCard({ tone = "light" }: { tone?: "light" | "dark" }
     >
       <p className={`type-kicker ${dark ? "text-white/55" : ""}`}>{t("kicker")}</p>
       <h3 className={`type-h3 mt-3 ${dark ? "text-white" : ""}`}>{t("title")}</h3>
-      <p className={`mt-3 text-sm leading-6 ${dark ? "text-white/70" : "text-ink-2"}`}>
-        {ct(site.streetAddress)}
-        <br />
-        {ct(site.addressLocality)}, {ct(site.addressCountry)}
-      </p>
+      <ul className={`mt-4 grid gap-4 text-sm leading-6 ${dark ? "text-white/70" : "text-ink-2"}`}>
+        {site.offices.map((office) => (
+          <li
+            key={office.id}
+            className={`border-s-2 ps-3 ${dark ? "border-white/20" : "border-border-strong"}`}
+          >
+            <p className={`font-semibold ${dark ? "text-white" : "text-ink"}`}>{to(office.id)}</p>
+            <p className="mt-0.5">{ct(office.address)}</p>
+            <p className={`mt-0.5 text-xs ${dark ? "text-white/50" : "text-muted"}`}>
+              {to("legalEntity")}: {office.legalName}
+            </p>
+            <a
+              href={office.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-1 inline-block text-xs font-semibold underline-offset-2 hover:underline ${
+                dark ? "text-white hover:text-white/80" : "text-brand hover:text-brand-hover"
+              }`}
+            >
+              {t("openMaps")}
+            </a>
+          </li>
+        ))}
+      </ul>
       <dl className={`mt-5 space-y-3 text-sm ${dark ? "text-white/70" : "text-ink-2"}`}>
         <div>
           <dt className={`text-xs uppercase tracking-[0.12em] ${dark ? "text-white/45" : "text-muted"}`}>
@@ -58,14 +78,6 @@ export async function OfficeCard({ tone = "light" }: { tone?: "light" | "dark" }
       <div className="mt-6 flex flex-wrap gap-2">
         <Button href="/contact" size="sm">
           {t("requestBriefing")}
-        </Button>
-        <Button
-          href={site.maps}
-          size="sm"
-          variant="outline"
-          className={dark ? "border-white/25 bg-white/5 text-white hover:bg-white/10" : ""}
-        >
-          {t("openMaps")}
         </Button>
       </div>
     </aside>

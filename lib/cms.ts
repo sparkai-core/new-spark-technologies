@@ -1,5 +1,5 @@
 import type { SocialName } from "@/components/ui/SocialIcon";
-import { site as defaultSite, team as defaultTeam } from "@/lib/site";
+import { site as defaultSite, team as defaultTeam, type Office } from "@/lib/site";
 
 export type CmsSocial = {
   id?: string;
@@ -94,6 +94,8 @@ type SiteConfig = {
   addressLocality: string;
   addressCountry: string;
   maps: string;
+  /** Both offices in display order; the primary one picks up CMS address overrides. */
+  offices: Office[];
   hours: string;
   linkedin: string;
   sparkAiUrl: string;
@@ -135,6 +137,7 @@ const SOCIAL_NAMES = new Set<SocialName>([
   "linkedin",
   "instagram",
   "x",
+  "tiktok",
   "youtube",
   "whatsapp",
   "facebook",
@@ -232,6 +235,16 @@ export async function getSiteConfig(): Promise<SiteConfig> {
     addressLocality: pick(c?.addressLocality, defaultSite.addressLocality),
     addressCountry: pick(c?.addressCountry, defaultSite.addressCountry),
     maps: pick(c?.maps, defaultSite.maps),
+    offices: defaultSite.offices.map((office) =>
+      office.locality === defaultSite.addressLocality
+        ? {
+            ...office,
+            address: pick(c?.address, office.address),
+            streetAddress: pick(c?.streetAddress, office.streetAddress),
+            maps: pick(c?.maps, office.maps),
+          }
+        : { ...office },
+    ),
     hours: pick(c?.hours, defaultSite.hours),
     linkedin,
     sparkAiUrl: defaultSite.sparkAiUrl,

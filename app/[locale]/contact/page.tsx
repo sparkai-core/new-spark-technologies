@@ -82,7 +82,10 @@ export default async function ContactPage() {
           <div className="min-w-0 space-y-3">
             <LeadForm />
             <p className="px-1 text-xs text-muted">
-              {t("directNote", { email: site.email, address: ct(site.address) })}
+              {t("directNote", {
+                email: site.email,
+                address: site.offices.map((office) => ct(office.address)).join(" · "),
+              })}
             </p>
           </div>
         </div>

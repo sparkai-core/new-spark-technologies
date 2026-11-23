@@ -450,6 +450,39 @@ body {
   }
 }
 
+/* Team page: "Meet the wider team" sliding rail */
+.team-rail {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.team-rail-row {
+  display: flex;
+  width: max-content;
+  animation: af-marquee 50s linear infinite;
+}
+
+.team-rail:hover .team-rail-row,
+.team-rail:focus-within .team-rail-row {
+  animation-play-state: paused;
+}
+
+/* Margin (not gap) keeps both copies the same width, so the -50% loop has no jump. */
+.team-rail-item {
+  margin-inline-end: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-rail-row {
+    animation: none;
+  }
+
+  /* Without motion the rail becomes a swipeable strip. */
+  .team-rail {
+    overflow-x: auto;
+  }
+}
+
 .logo-marquee {
   display: flex;
   gap: 3rem;

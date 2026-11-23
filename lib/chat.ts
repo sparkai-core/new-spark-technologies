@@ -60,7 +60,11 @@ export const topicLinks: Record<ChatTopic, ChatLinkDef[]> = {
   ],
   location: [
     { href: "/company", labelKey: "company" },
-    { href: site.maps, labelKey: "openMaps", external: true },
+    ...site.offices.map((office) => ({
+      href: office.maps,
+      labelKey: `maps.${office.id}`,
+      external: true,
+    })),
   ],
   pricing: [
     { href: "/contact", labelKey: "requestBriefing" },
@@ -105,7 +109,7 @@ export const matchChatTopic = (text: string): ChatTopic => {
   if (has("financ", "compliance", "audit", "risk", "fraud", "مالية", "maliyyə")) return "finance";
   if (has("safety", "workforce", "hsse", "incident", "ppe", "سلامة", "təhlükəsizlik"))
     return "safety";
-  if (has("dubai", "where", "office", "location", "based", "gcc", "uae", "أين", "harada"))
+  if (has("dubai", "baku", "where", "office", "location", "address", "based", "gcc", "uae", "أين", "مكتب", "harada", "ofis", "ünvan", "bakı"))
     return "location";
   if (has("price", "cost", "pricing", "budget", "pilot", "سعر", "qiymət")) return "pricing";
   if (has("case", "result", "proof", "outcome", "azer", "powerline", "نتائج", "nəticə"))
