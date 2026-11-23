@@ -4,6 +4,15 @@ import Image from "next/image";
 import { TeamRoster } from "@/components/site/TeamRoster";
 import { Link } from "@/i18n/navigation";
 import { getTeamConfig } from "@/lib/cms";
+import { bakuTeam, widerTeam } from "@/lib/site";
+
+const bakuInitials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
 export async function generateMetadata() {
   const t = await getTranslations("Team");
@@ -51,15 +60,26 @@ function LeadershipCard({
           reverse ? "lg:order-3" : ""
         }`}
       >
-        <Image
-          src={person.photo}
-          alt={person.name}
-          fill
-          priority={priority}
-          sizes="(min-width: 1024px) 272px, 90vw"
-          className="object-cover"
-          style={{ objectPosition: person.position }}
-        />
+        {person.photo ? (
+          <Image
+            src={person.photo}
+            alt={person.name}
+            fill
+            priority={priority}
+            sizes="(min-width: 1024px) 272px, 90vw"
+            className="object-cover"
+            style={{ objectPosition: person.position }}
+          />
+        ) : (
+          // Monogram until a portrait is added
+          <div
+            role="img"
+            aria-label={person.name}
+            className="absolute inset-0 flex items-center justify-center bg-[#eae2fc] text-5xl font-semibold tracking-tight text-signal"
+          >
+            {bakuInitials(person.name)}
+          </div>
+        )}
       </div>
 
       <div className={`flex flex-col justify-center ${reverse ? "lg:order-2" : ""}`}>
@@ -213,6 +233,78 @@ export default async function TeamPage() {
         </div>
       </section>
 
+      <section className="border-b border-border bg-surface" aria-labelledby="baku-team-heading">
+        <div className="mx-auto max-w-6xl px-4 section-y sm:px-5">
+          <p className="af-kicker">{t("bakuKicker")}</p>
+          <h2
+            id="baku-team-heading"
+            className="mt-4 max-w-xl text-[1.75rem] font-semibold leading-[1.1] tracking-[-0.03em] text-ink sm:text-[2.25rem]"
+          >
+            {t("bakuTitle")}
+          </h2>
+          <p className="mt-3 max-w-xl text-[0.95rem] leading-7 text-ink-2">{t("bakuLede")}</p>
+
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {bakuTeam.map((person) => (
+              <li
+                key={person.name}
+                className="flex flex-col rounded-xl border border-border bg-bg p-5 shadow-[var(--shadow-sm)]"
+              >
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-[#eae2fc]">
+                  {person.photo ? (
+                    <Image
+                      src={person.photo}
+                      alt={person.name}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                      style={{ objectPosition: person.position }}
+                    />
+                  ) : (
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 flex items-center justify-center text-lg font-semibold tracking-tight text-signal"
+                    >
+                      {bakuInitials(person.name)}
+                    </span>
+                  )}
+                </div>
+                <h3 className="mt-4 text-base font-semibold tracking-tight text-ink">{person.name}</h3>
+                <p className="mb-5 mt-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-signal">
+                  {t(`bakuRoles.${person.roleKey}`)}
+                </p>
+                <dl className="mt-auto space-y-2 border-t border-border pt-4 text-sm">
+                  <div>
+                    <dt className="sr-only">{t("phone")}</dt>
+                    <dd>
+                      <a
+                        href={`tel:${person.phone.replace(/\s+/g, "")}`}
+                        className="font-medium text-ink underline-offset-2 hover:text-signal hover:underline"
+                        dir="ltr"
+                      >
+                        {person.phone}
+                      </a>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="sr-only">{t("email")}</dt>
+                    <dd className="min-w-0">
+                      <a
+                        href={`mailto:${person.email}`}
+                        className="break-all text-ink-2 underline-offset-2 hover:text-signal hover:underline"
+                        dir="ltr"
+                      >
+                        {person.email}
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <TeamRoster
         members={delivery.map((m) => ({
           name: m.name,
@@ -225,7 +317,9 @@ export default async function TeamPage() {
           group: m.group,
           tags: [...m.tags],
         }))}
+        wider={widerTeam}
         labels={{
+          widerTeam: t("widerTeam"),
           ourTeam: t("ourTeam"),
           featured: t("featured"),
           plusOrg: t("plusOrg"),
