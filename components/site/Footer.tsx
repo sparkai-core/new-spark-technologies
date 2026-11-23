@@ -13,6 +13,7 @@ export async function Footer() {
   const tn = await getTranslations("Nav");
   const tm = await getTranslations("Modules");
   const tc = await getTranslations("HomeContent");
+  const to = await getTranslations("Offices");
   const site = await getSiteConfig();
   const ct = await getCt();
 
@@ -41,19 +42,24 @@ export async function Footer() {
           <Logo tone="light" />
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/70">{t("blurb")}</p>
           <SocialLinks links={site.socials} tone="dark" className="mt-5" />
-          <p className="mt-5 text-sm text-white/70">{ct(site.streetAddress)}</p>
-          <p className="text-sm text-white/55">
-            {ct(site.addressLocality)}, {ct(site.addressCountry)}
-          </p>
+          <ul className="mt-5 grid gap-4 text-sm">
+            {site.offices.map((office) => (
+              <li key={office.id}>
+                <p className="font-semibold text-white/85">{to(office.id)}</p>
+                <p className="mt-1 leading-6 text-white/70">{ct(office.address)}</p>
+                <a
+                  href={office.maps}
+                  target="_blank"
+                  className="mt-1 inline-block text-sm font-semibold text-white hover:text-white/80"
+                  rel="noopener noreferrer"
+                >
+                  {t("openMaps")}
+                </a>
+              </li>
+            ))}
+          </ul>
           <p className="mt-4 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-white/45">{t("markets")}</p>
           <p className="mt-3 text-sm text-white/55">{tc("hours")}</p>
-          <a
-            href={site.maps}
-            className="mt-3 inline-block text-sm font-semibold text-white hover:text-white/80"
-            rel="noreferrer"
-          >
-            {t("openMaps")}
-          </a>
         </div>
 
         <div>
