@@ -22,7 +22,6 @@ export default async function CompanyPage() {
   const t = await getTranslations("Pages.company");
   const tc = await getTranslations("HomeContent");
   const tu = await getTranslations("Ui");
-  const to = await getTranslations("Pages.office");
   const site = await getSiteConfig();
   const ct = await getCt();
 
@@ -69,6 +68,20 @@ export default async function CompanyPage() {
     },
     sameAs: site.socials.map((item) => item.href),
     hasMap: site.maps,
+    department: site.offices
+      .filter((office) => office.locality !== site.addressLocality)
+      .map((office) => ({
+        "@type": "Organization",
+        name: `${site.name} — ${office.label}`,
+        legalName: office.legalName,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: office.streetAddress,
+          addressLocality: office.locality,
+          addressCountry: office.country,
+        },
+        hasMap: office.maps,
+      })),
   };
 
   return (
@@ -172,9 +185,6 @@ export default async function CompanyPage() {
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/contact" size="lg">
                 {t("bookOffice")}
-              </Button>
-              <Button href={site.maps} size="lg" variant="outline">
-                {to("openMaps")}
               </Button>
             </div>
           </div>
