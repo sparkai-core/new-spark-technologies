@@ -1,5 +1,6 @@
 {
  "Dubai": "دبي",
+ "All countries": "جميع الدول",
  "Sunday – Thursday, 9:00 – 18:00 GST": "الأحد – الخميس، 9:00 – 18:00 بتوقيت الخليج",
  "Solutions": "الحلول",
  "Products": "المنتجات",
@@ -808,6 +809,9 @@
  "Spark Technologies builds enterprise AI systems for industrial and operational environments — from data to decisions at scale.": "تبني Spark Technologies أنظمة ذكاء اصطناعي للمؤسسات في البيئات الصناعية والتشغيلية — من البيانات إلى القرارات على نطاق واسع.",
  "Office 705, New Century City Tower, Port Saeed, Dubai, UAE": "مكتب 705، برج نيو سنشري سيتي، بور سعيد، دبي، الإمارات",
  "Office 705, New Century City Tower, Port Saeed": "مكتب 705، برج نيو سنشري سيتي، بور سعيد",
+ "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor, Baku, Azerbaijan": "شارع جليل محمدقولوزاده 102A، مركز أعمال سيتي بوينت، الطابق الثاني، باكو، أذربيجان",
+ "Jalil Mammadguluzadeh str. 102A, City Point Business Center, 2nd floor": "شارع جليل محمدقولوزاده 102A، مركز أعمال سيتي بوينت، الطابق الثاني",
+ "Baku": "باكو",
  "Spark Technologies on LinkedIn": "Spark Technologies على LinkedIn",
  "Spark Technologies on Instagram": "Spark Technologies على Instagram",
  "Spark Technologies on X": "Spark Technologies على X",
@@ -919,5 +923,12 @@
  "Using AI to solve real business problems": "نستخدم الذكاء الاصطناعي لحل مشكلات أعمال حقيقية",
  "{name} product screenshot": "لقطة شاشة لمنتج {name}",
  "{brand} on {network}": "{brand} على {network}",
- "UAE": "الإمارات"
+ "UAE": "الإمارات",
+ "AI Strategy Head": "رئيس استراتيجية الذكاء الاصطناعي",
+ "AI / ML Engineer": "مهندس ذكاء اصطناعي / تعلم آلة",
+ "AI Automation Engineer": "مهندس أتمتة بالذكاء الاصطناعي",
+ "AI Agentic Engineer": "مهندس وكلاء الذكاء الاصطناعي",
+ "Full Stack Developer Lead": "قائد مطوري Full Stack",
+ "Full Stack Developer": "مطور Full Stack",
+ "Data Annotator": "مختص توسيم البيانات"
 }
