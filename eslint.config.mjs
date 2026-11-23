@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Mirrored third-party builds and one-off scrape/patch scripts
+    "public/**",
+    "scripts/**",
   ]),
 ]);
 
