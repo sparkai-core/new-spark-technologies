@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSiteConfig } from "@/lib/cms";
 import { getCt } from "@/i18n/content-server";
@@ -42,6 +43,7 @@ export async function BusinessProfile({
 }: BusinessProfileProps) {
   const site = await getSiteConfig();
   const ct = await getCt();
+  const to = await getTranslations("Offices");
   const rows = [
     {
       label: legalLabel,
@@ -62,11 +64,25 @@ export async function BusinessProfile({
         </svg>
       ),
       value: (
-        <>
-          {ct(site.streetAddress)}
-          <br />
-          {ct(site.addressLocality)}, {ct(site.addressCountry)}
-        </>
+        <span className="grid gap-3">
+          {site.offices.map((office) => (
+            <span key={office.id} className="block">
+              <span className="block font-semibold text-ink">{to(office.id)}</span>
+              <span className="block">{ct(office.address)}</span>
+              <span className="block text-xs text-muted">
+                {legalLabel}: {office.legalName}
+              </span>
+              <a
+                href={office.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold underline-offset-2 hover:text-ink hover:underline"
+              >
+                {mapsLabel}
+              </a>
+            </span>
+          ))}
+        </span>
       ),
     },
     {
@@ -177,14 +193,6 @@ export async function BusinessProfile({
         >
           {contactLabel}
         </Link>
-        <a
-          href={site.maps}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex flex-1 items-center justify-center rounded-md border border-border-strong bg-bg px-4 py-2.5 text-sm font-semibold text-ink hover:bg-surface sm:flex-none"
-        >
-          {mapsLabel}
-        </a>
       </div>
     </aside>
   );
