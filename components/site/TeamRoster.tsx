@@ -20,13 +20,16 @@ type RosterLabels = {
   plusOrg: string;
   plusOrgText: string;
   roles: string[];
+  widerTeam?: string;
 };
 
 export function TeamRoster({
   members,
+  wider = [],
   labels,
 }: {
   members: TeamMemberCard[];
+  wider?: readonly { name: string; photo: string; role?: string }[];
   labels?: RosterLabels;
 }) {
   const ct = ctFor(useLocale());
@@ -69,11 +72,13 @@ export function TeamRoster({
                 />
               </div>
               <div className="flex flex-1 flex-col p-3">
-                <p className="flex items-center gap-1.5 text-[0.6rem] font-medium text-ink-2">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden />
-                  {person.location}
-                </p>
-                <h3 className="mt-1.5 text-[0.8rem] font-semibold leading-snug tracking-tight text-ink">
+                {person.location ? (
+                  <p className="mb-1.5 flex items-center gap-1.5 text-[0.6rem] font-medium text-ink-2">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" aria-hidden />
+                    {person.location}
+                  </p>
+                ) : null}
+                <h3 className="text-[0.8rem] font-semibold leading-snug tracking-tight text-ink">
                   {person.name}
                 </h3>
                 <p className="mt-0.5 text-[0.7rem] leading-snug text-muted">{person.role}</p>
@@ -92,24 +97,49 @@ export function TeamRoster({
           ))}
         </ul>
 
-        {/* Photo placeholder — swap src later for a real team photo */}
-        <div className="mt-8 overflow-hidden rounded-2xl border border-dashed border-border bg-canvas">
-          <div
-            className="relative flex aspect-[21/9] min-h-[9rem] w-full items-center justify-center sm:min-h-[11rem]"
-            data-placeholder="team-org-photo"
-          >
-            <div className="px-6 text-center">
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted">
-                {ct("Team photo")}
-              </p>
-              <p className="mt-2 text-sm text-ink-2">
-                {ct("Placeholder — add organisation team picture here later")}
-              </p>
+        {wider.length > 0 ? (
+          <div className="mt-12">
+            <h3 className="text-[1.15rem] font-semibold tracking-[-0.02em] text-ink sm:text-[1.3rem]">
+              {labels?.widerTeam ?? ct("Meet the wider team")}
+            </h3>
+            {/* Sliding rail: the list is rendered twice and shifted by half its width for a seamless loop.
+                Kept left-to-right in every locale so the loop direction matches the animation. */}
+            <div className="team-rail mt-5" dir="ltr">
+              <ul className="team-rail-row">
+                {[...wider, ...wider].map((person, index) => {
+                  const copyItem = index >= wider.length;
+                  return (
+                    <li
+                      key={`${person.name}-${copyItem ? "b" : "a"}`}
+                      aria-hidden={copyItem || undefined}
+                      className="team-rail-item w-24 shrink-0 text-center sm:w-28"
+                    >
+                      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-[#6d5cf6]">
+                        <Image
+                          src={person.photo}
+                          alt={copyItem ? "" : person.name}
+                          fill
+                          sizes="112px"
+                          loading="eager" // lazy loading misses tiles that slide in via transform
+                          unoptimized // already cropped and compressed to 480px JPEGs
+                          className="object-cover"
+                        />
+                      </div>
+                      <p className="mt-2 text-[0.7rem] font-medium leading-snug text-ink">{person.name}</p>
+                      {person.role ? (
+                        <p className="mt-0.5 text-[0.6rem] leading-snug text-muted" dir="auto">
+                          {ct(person.role)}
+                        </p>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
-        </div>
+        ) : null}
 
-        <div className="mt-4 rounded-2xl border border-border bg-bg px-5 py-5 shadow-[var(--shadow-sm)] sm:flex sm:items-center sm:justify-between sm:gap-8 sm:px-7 sm:py-6">
+        <div className="mt-10 rounded-2xl border border-border bg-bg px-5 py-5 shadow-[var(--shadow-sm)] sm:flex sm:items-center sm:justify-between sm:gap-8 sm:px-7 sm:py-6">
           <div className="max-w-md">
             <p className="text-[1.05rem] font-semibold tracking-[-0.02em] text-ink sm:text-[1.15rem]">
               {copy.plusOrg}
