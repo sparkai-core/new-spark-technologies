@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { matchChatTopic, suggestionKeys, topicLinks, type ChatTopic } from "@/lib/chat";
-import { site as defaultSite } from "@/lib/site";
+import { site as defaultSite, type Office } from "@/lib/site";
 import { submitLead } from "@/lib/submit-lead";
 import { Button } from "@/components/ui/Button";
 import { useCt } from "@/components/i18n/ContentI18n";
@@ -18,11 +18,13 @@ type Message = {
 
 type ChatWidgetProps = {
   address?: string;
+  offices?: readonly Office[];
   whatsapp?: string;
 };
 
 export const ChatWidget = ({
   address = defaultSite.address,
+  offices = defaultSite.offices,
   whatsapp = defaultSite.whatsapp,
 }: ChatWidgetProps) => {
   const t = useTranslations("AskSpark");
@@ -37,9 +39,15 @@ export const ChatWidget = ({
 
   const buildReply = (topic: ChatTopic): Message => ({
     from: "spark",
-    text: t(`replies.${topic}`, { address: ct(address) }),
+    text: t(`replies.${topic}`, {
+      address: ct(address),
+      ...Object.fromEntries(offices.map((office) => [office.id, ct(office.address)])),
+    }),
     links: topicLinks[topic].map((link) => ({
-      href: link.href === defaultSite.whatsapp ? whatsapp : link.href,
+      href:
+        link.href === defaultSite.whatsapp
+          ? whatsapp
+          : (offices.find((office) => `maps.${office.id}` === link.labelKey)?.maps ?? link.href),
       label: t(`links.${link.labelKey}`),
       external: link.external,
     })),
@@ -54,8 +62,10 @@ export const ChatWidget = ({
     { from: "spark", text: t("greeting") },
   ]);
 
+  // Restart the conversation in the new language when the locale changes
   useEffect(() => {
-    setMessages([{ from: "spark", text: t("greeting") }]);
+    const id = window.requestAnimationFrame(() => setMessages([{ from: "spark", text: t("greeting") }]));
+    return () => window.cancelAnimationFrame(id);
   }, [t]);
 
   useEffect(() => {
